@@ -1,3 +1,5 @@
-from django.shortcuts import render_to_response,RequestContext
+from django.shortcuts import render_to_response, RequestContext
 
-# Create your views here.
+
+def home_page(request):
+    return render_to_response('home_page.html', locals(), context_instance=RequestContext(request))
