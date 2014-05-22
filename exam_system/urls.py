@@ -7,5 +7,11 @@ from exam import views
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'',include('exam.urls')),
+    url(r'', include('exam.urls')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+#captcha
+urlpatterns += patterns('',
+                        url(r'^captcha/',include('captcha.urls')),
+                        )

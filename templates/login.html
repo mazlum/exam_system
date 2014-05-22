@@ -1,0 +1,63 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+
+    <script type="text/javascript">
+        $(function () {
+            $('#id_captcha_1').css({'padding': '5px', 'border-radius': '4px', 'border': '1px solid #ccc'}).attr('placeholder', 'Enter image field')
+        })
+    </script>
+
+    <div class="container">
+        <div class="panel panel-info" style="margin-top: 10px">
+            <div class="panel-heading">
+                <h3 class="panel-title">Log in</h3>
+            </div>
+
+            <div class="panel-body">
+                <form role="form" method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        {{ loginForm.username }}
+                    </div>
+                    {% if loginForm.username.errors %}
+                        <div class="alert alert-danger"
+                             style="padding: 2px;margin-top: 3px">{{ loginForm.username.errors }}</div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        {{ loginForm.password }}
+                    </div>
+                    {% if loginForm.non_field_errors %}
+                        <div class="alert alert-danger"
+                             style="padding: 2px;margin-top: 3px">{{ loginForm.non_field_errors }}</div>
+                    {% endif %}
+                    {% if loginForm.password.errors %}
+                        <div class="alert alert-danger"
+                             style="padding: 2px;margin-top: 3px">{{ loginForm.password.errors }}</div>
+                    {% endif %}
+
+
+                    <div class="form-group">
+                        <label for="{{ loginForm.captcha.auto_id }}">{{ loginForm.captcha.label }}</label><br/>
+                        {{ loginForm.captcha }}
+                    </div>
+                    {% if loginForm.captcha.errors %}
+                        <div class="alert alert-danger"
+                             style="padding: 2px;margin-top: 3px">{{ loginForm.captcha.errors }}</div>
+                    {% endif %}
+                    <button type="submit" name="login" class="btn btn-default">Sign in</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+
+
+
+
