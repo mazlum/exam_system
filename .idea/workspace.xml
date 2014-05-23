@@ -32,32 +32,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/exam/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="35" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/exam/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="80" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+            <state line="56" column="33" selection-start="1854" selection-end="1854" vertical-scroll-proportion="0.48757765" vertical-offset="526" max-vertical-offset="1170">
               <folding>
-                <element signature="e#0#63#0" expanded="true" />
+                <element signature="e#24#87#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="exams.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/exams.html">
+      <file leaf-file-name="exam_access.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/exam_access.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="39" selection-start="359" selection-end="359" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="405">
+            <state line="18" column="28" selection-start="566" selection-end="566" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="645">
               <folding />
             </state>
           </provider>
@@ -66,35 +55,9 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exam/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="49" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+            <state line="7" column="13" selection-start="207" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
               <folding>
                 <element signature="e#24#52#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/exam/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="38" selection-start="243" selection-end="243" vertical-scroll-proportion="0.16149068" vertical-offset="16" max-vertical-offset="945">
-              <folding>
-                <element signature="e#24#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="14" selection-start="2357" selection-end="2357" vertical-scroll-proportion="-33.125" vertical-offset="0" max-vertical-offset="1035">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#4;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#6;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,14 +81,15 @@
         <option value="$PROJECT_DIR$/exam_system/settings.py" />
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/exam/forms.py" />
-        <option value="$PROJECT_DIR$/exam/urls.py" />
         <option value="$PROJECT_DIR$/exam_system/urls.py" />
         <option value="$PROJECT_DIR$/templates/home_page.html" />
         <option value="$PROJECT_DIR$/templates/exams..html" />
-        <option value="$PROJECT_DIR$/exam/models.py" />
-        <option value="$PROJECT_DIR$/exam/views.py" />
         <option value="$PROJECT_DIR$/templates/exams.html" />
+        <option value="$PROJECT_DIR$/exam/models.py" />
+        <option value="$PROJECT_DIR$/exam/urls.py" />
         <option value="$PROJECT_DIR$/exam/admin.py" />
+        <option value="$PROJECT_DIR$/templates/exam_access.html" />
+        <option value="$PROJECT_DIR$/exam/views.py" />
       </list>
     </option>
   </component>
@@ -550,16 +514,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exam/urls.py">
+    <entry file="file://$PROJECT_DIR$/exam_system/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="211" selection-end="211" vertical-scroll-proportion="0.16304348" vertical-offset="0" max-vertical-offset="644">
+        <state line="12" column="0" selection-start="385" selection-end="385" vertical-scroll-proportion="0.2795031" vertical-offset="0" max-vertical-offset="644">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/exams.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="6" selection-start="522" selection-end="522" vertical-scroll-proportion="0.43548387" vertical-offset="0" max-vertical-offset="620">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="14" selection-start="2357" selection-end="2357" vertical-scroll-proportion="-33.125" vertical-offset="0" max-vertical-offset="1035">
+        <state line="53" column="14" selection-start="2357" selection-end="2357" vertical-scroll-proportion="1.3097199" vertical-offset="0" max-vertical-offset="1035">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -570,11 +543,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exam_system/urls.py">
+    <entry file="file://$PROJECT_DIR$/exam/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="385" selection-end="385" vertical-scroll-proportion="0.2795031" vertical-offset="0" max-vertical-offset="644">
+        <state line="5" column="55" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exam/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="22" selection-start="360" selection-end="360" vertical-scroll-proportion="0.32608697" vertical-offset="0" max-vertical-offset="1065">
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#24#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exam/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="35" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0931677" vertical-offset="0" max-vertical-offset="644">
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exam/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="207" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+          <folding>
+            <element signature="e#24#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -586,45 +584,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exam/forms.py">
+    <entry file="file://$PROJECT_DIR$/templates/exam_access.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="35" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
+        <state line="18" column="28" selection-start="566" selection-end="566" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="645">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/exam/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="80" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+        <state line="56" column="33" selection-start="1854" selection-end="1854" vertical-scroll-proportion="0.48757765" vertical-offset="526" max-vertical-offset="1170">
           <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/exams.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="39" selection-start="359" selection-end="359" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exam/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="49" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <folding>
-            <element signature="e#24#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/exam/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="38" selection-start="243" selection-end="243" vertical-scroll-proportion="0.16149068" vertical-offset="16" max-vertical-offset="945">
-          <folding>
-            <element signature="e#24#56#0" expanded="true" />
+            <element signature="e#24#87#0" expanded="true" />
           </folding>
         </state>
       </provider>

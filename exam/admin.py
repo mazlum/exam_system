@@ -4,14 +4,22 @@ from exam.models import *
 from django.contrib.auth.forms import *
 
 
+class QuestionInline(admin.TabularInline):
+    model = Question
+
+
 class ExamAdmin(admin.ModelAdmin):
     list_display = ('name', 'time', 'start')
     prepopulated_fields = {"name_slug": ("name",)}
+    inlines = [
+        QuestionInline,
+    ]
 
 class AnswerInline(admin.TabularInline):
     model = Answer
     extra = 4
     max_num = 5
+
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('question', 'exam', 'point')

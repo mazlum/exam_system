@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User, Group
+
 
 class Exam(models.Model):
     name = models.CharField(max_length=100, verbose_name="Exam Name ")
