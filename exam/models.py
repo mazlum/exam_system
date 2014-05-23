@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.contrib.auth.models import User,Group
 
 class Exam(models.Model):
-    name = models.CharField(max_length=200, verbose_name="Exam Name ")
+    name = models.CharField(max_length=100, verbose_name="Exam Name ")
+    name_slug = models.CharField(max_length=100, verbose_name="Exam Slug ")
     time = models.IntegerField(verbose_name="Exam Time ")
     start = models.BooleanField(verbose_name="Exam Started ")
 
@@ -37,3 +37,10 @@ class QuestionUserAnswer(models.Model):
 
     def __str__(self):
         return "%s,%s,%s"%(self.user,self.question,self.answer)
+
+class GroupExam(models.Model):
+    group = models.ForeignKey(Group, verbose_name="Group ")
+    exam = models.ManyToManyField(Exam, verbose_name="Exam ")
+
+    def __str__(self):
+        return "%s,%s"%(self.group,self.exam)

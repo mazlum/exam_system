@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Exams</div>
+        <table class="table">
+            <tr>
+                <th>Exam</th>
+                <th>Time</th>
+            </tr>
+            {% for exam in have_exams %}
+                <tr>
+                    <td><a href="/exam/{{ exam.name_slug }}">{{ exam.name }}</a></td>
+                    <td>{{ exam.time }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+</div>
+
+
+{% endblock %}

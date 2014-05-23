@@ -2,9 +2,17 @@ from django.shortcuts import render_to_response, RequestContext
 from django.http import HttpResponseRedirect
 from exam.forms import *
 from django.contrib.auth import *
+from exam.models import *
+
 
 def home_page(request):
-    return render_to_response('home_page.html', locals(), context_instance=RequestContext(request))
+    exams_groups = GroupExam.objects.filter(group__in=request.user.groups.all())
+    have_exams = []
+    for exams_group in exams_groups.all():
+        for exam in exams_group.exam.all():
+            have_exams.append(exam)
+
+    return render_to_response('exams.html', locals(), context_instance=RequestContext(request))
 
 
 def user_login(request):
