@@ -15,6 +15,10 @@ class ExamAdmin(admin.ModelAdmin):
         QuestionInline,
     ]
 
+class UserExamAdmin(admin.ModelAdmin):
+    list_display = ["user", "exam", "point"]
+    list_filter = ["user", "exam"]
+
 class AnswerInline(admin.TabularInline):
     model = Answer
     extra = 4
@@ -22,13 +26,15 @@ class AnswerInline(admin.TabularInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'exam', 'point')
+    list_display = ('question', 'exam', 'get_true_answer')
     inlines = [
         AnswerInline,
     ]
     search_fields = ('question', )
     list_filter = ('exam', )
 
+    def get_true_answer(self, obj):
+        return Answer.objects.get(question=obj, true=True).answer
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('answer', 'question', 'true')
@@ -37,9 +43,8 @@ class AnswerAdmin(admin.ModelAdmin):
 
 
 class QuestionUserAnswerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'question', 'answer')
-    list_filter = ('user', 'question', 'answer')
-
+    list_display = ('user', 'exam', 'question', 'answer')
+    list_filter = ('user', 'exam', 'question')
 
 class GroupExamForm(forms.ModelForm):
     def clean_group(self):
@@ -59,8 +64,11 @@ class GroupExamAdmin(admin.ModelAdmin):
     list_filter = ['group', 'exam']
     filter_horizontal = ('exam', )
 
+
+
 admin.site.register(Exam, ExamAdmin)
+admin.site.register(UserExam, UserExamAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
-admin.site.register(QuestionUserAnswer)
+admin.site.register(QuestionUserAnswer, QuestionUserAnswerAdmin)
 admin.site.register(GroupExam, GroupExamAdmin)

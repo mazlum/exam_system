@@ -13,10 +13,18 @@ class Exam(models.Model):
         return self.name
 
 
+class UserExam(models.Model):
+    user = models.ForeignKey(User, verbose_name="User ")
+    exam = models.ForeignKey(Exam, verbose_name="Exam ")
+    point = models.IntegerField(verbose_name="User Point")
+
+    def __unicode__(self):
+        return "%s - %s"%(self.user.username, self.exam.name)
+
+
 class Question(models.Model):
     question = models.TextField(verbose_name="Question Title ")
     exam = models.ForeignKey(Exam, verbose_name="Question Exam ")
-    point = models.IntegerField(verbose_name="Question Point ")
 
     def __unicode__(self):
         return self.question
@@ -33,6 +41,7 @@ class Answer(models.Model):
 
 class QuestionUserAnswer(models.Model):
     user = models.ForeignKey(User, verbose_name="User ")
+    exam = models.ForeignKey(Exam, verbose_name="Exam ")
     question = models.ForeignKey(Question, verbose_name="Question ")
     answer = models.ForeignKey(Answer, verbose_name="Answer ")
 

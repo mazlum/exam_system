@@ -1,0 +1,8 @@
+.radio_answer{
+    padding: 0 10px 0 10px;
+}
+.radio_answer:hover{
+    background: #6d84b4;
+    color: #fff;
+    border-radius: 2px;
+}

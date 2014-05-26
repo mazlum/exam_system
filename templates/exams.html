@@ -3,6 +3,7 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">Exams</div>
+    {% if have_exams|length > 0 %}
         <table class="table">
             <tr>
                 <th>Exam</th>
@@ -14,7 +15,12 @@
                     <td>{{ exam.time }}</td>
                 </tr>
             {% endfor %}
-
         </table>
+    {% else %}
+    <div class="alert alert-danger" style="margin: 10px">
+        You don't have to can solve exam.
+    </div>
+
+    {% endif %}
 </div>
 {% endblock %}

@@ -8,6 +8,7 @@ from exam import views
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('exam.urls')),
+    url(r'^accounts/login/$','exam.views.user_login'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

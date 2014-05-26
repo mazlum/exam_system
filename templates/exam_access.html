@@ -6,6 +6,11 @@
         {{ danger }}
         </div>
 
+    {% elif add_success %}
+        <div class="alert alert-success">
+            {{ add_success }}
+            <meta http-equiv="REFRESH" content="2;url=/">
+        </div>
     {% else %}
 
         <div class="panel panel-success">
@@ -19,19 +24,37 @@
                             {% csrf_token %}
                             {% for answer in answers %}
                                 <div class="radio">
-                                    <label>
-                                        <input type="radio" name="answer" value="{{ answer.id }}"/> {{ answer.answer }}<br/>
+                                    <label >
+                                        <input type="radio" name="answer" value="{{ answer.id }}" {% if answer == question_user_answer.0.answer %} checked {% endif %}/>
+                                        <div class="radio_answer">{{ answer.answer }}</div>
                                     </label>
                                 </div>
                             {% endfor %}
-                            <button type="submit" class="btn btn-default">Reply</button>
+
+                            {% if i != 0 %}
+                            <button name="back" class="btn btn-info">Back</button>
+                            {% endif %}
+
+                            <button name="reply" type="submit" class="btn btn-danger">
+                                {% if exam_question_count|add:-1 != i %}
+                                Reply
+                                {% else %}
+                                Reply and Finished
+                                {% endif %}
+                            </button>
                         </form>
+
+
+                        {% if warning %}
+                            <div class="alert alert-warning" style="padding: 6px">
+                                {{ warning }}
+                            </div>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
         </div>
-
     {% endif %}
 {% endblock %}
-
 
