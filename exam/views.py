@@ -56,6 +56,22 @@ def user_login(request):
     return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
 
+def user_exam_question(request, exam_slug):
+    try:
+        exam = UserExam.objects.get(exam__name_slug=exam_slug, user=request.user, exam__see=True).exam
+
+        questions = Question.objects.filter(exam=exam)
+    except Exam.DoesNotExist:
+        danger = "Sorry, you don't have this exam."
+    except UserExam.DoesNotExist:
+        danger = "Sorry, you don't have this exam."
+
+    return render_to_response('user_exam_question.html', locals(), context_instance=RequestContext(request))
+
+@login_required
+def user_solve_exams(request):
+    exams = UserExam.objects.filter(user=request.user, exam__see=True)
+    return render_to_response('user_exams.html', locals(), context_instance=RequestContext(request))
 
 i=0
 @login_required
@@ -122,7 +138,7 @@ def exam_access(request, exam_slug):
                     add_answer = QuestionUserAnswer(user=request.user, exam=exam, question=question, answer=Answer.objects.get(id=question_answer))
                     add_answer.save()
 
-                    ##if not last question
+                    ##is question last?
                     if i != exam_question_count-1:
                         i += 1
                         return HttpResponseRedirect('/exam/'+exam.name_slug)
@@ -133,7 +149,7 @@ def exam_access(request, exam_slug):
                         #Add UserExam user exam and point
                         user_exam_add = UserExam(user=request.user, exam=exam, point=true_answer).save()
                         #delete QuestionUserAnswer user exam answers
-                        QuestionUserAnswer.objects.filter(user=request.user, exam=exam).delete()
+                        #QuestionUserAnswer.objects.filter(user=request.user, exam=exam).delete()
 
                         add_success = "Thank you. You successfully finished the exam."
                         i = 0

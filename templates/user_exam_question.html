@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+{% load custom_filters %}
+{% block content %}
+{% if danger %}
+        <div class="alert alert-danger">
+        {{ danger }}
+        </div>
+{% else %}
+    <div class="panel panel-primary">
+    <div class="panel-heading">{{ exam.name }}</div>
+
+        <table class="table">
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>True Answer</th>
+            </tr>
+            {% for question in questions %}
+            <tr>
+                <td>{{ question.question }}</td>
+                <td>{{ question|true_answer:request.user }}</td>
+                <td>{{ question.get_true_answer }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endif %}
+{% endblock %}

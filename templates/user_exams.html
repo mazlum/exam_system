@@ -1,0 +1,24 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+    <div class="panel panel-primary">
+    <div class="panel-heading">Exams</div>
+    {% if exams|length > 0 %}
+        <table class="table">
+            <tr>
+                <th>Exam</th>
+                <th>Point</th>
+            </tr>
+            {% for exam in exams %}
+                <tr>
+                    <td><a href="/user-exam/{{ exam.exam.name_slug }}">{{ exam.exam.name }}</a></td>
+                    <td>{{ exam.point }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+    <div class="alert alert-danger" style="margin: 10px">
+       There isn't can you see exam.
+    </div>
+    {% endif %}
+{% endblock %}

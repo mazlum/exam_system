@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-/1sinav/
 from django.db import models
 from django.contrib.auth.models import User, Group
 
@@ -8,6 +8,7 @@ class Exam(models.Model):
     name_slug = models.CharField(max_length=100, verbose_name="Exam Slug ")
     time = models.IntegerField(verbose_name="Exam Time ")
     start = models.BooleanField(verbose_name="Exam Started ")
+    see = models.BooleanField(verbose_name="User see result ")
 
     def __unicode__(self):
         return self.name
@@ -19,12 +20,22 @@ class UserExam(models.Model):
     point = models.IntegerField(verbose_name="User Point")
 
     def __unicode__(self):
-        return "%s - %s"%(self.user.username, self.exam.name)
+        return "%s - %s" % (self.user.username, self.exam.name)
 
 
 class Question(models.Model):
     question = models.TextField(verbose_name="Question Title ")
     exam = models.ForeignKey(Exam, verbose_name="Question Exam ")
+
+    def get_true_answer(self):
+        try:
+            return Answer.objects.get(question=self, true=True).answer
+        except Answer.DoesNotExist:
+            return "Answer does not exist"
+    #### ???????????????????????????????
+
+    def get_user_answer(self, user):
+         QuestionUserAnswer.objects.get(question=self, user=user).answer.answer
 
     def __unicode__(self):
         return self.question
@@ -34,6 +45,7 @@ class Answer(models.Model):
     answer = models.CharField(max_length=300,verbose_name="Question answer ")
     question = models.ForeignKey(Question, verbose_name="Answer Question ")
     true = models.BooleanField(verbose_name="True Answer ")
+
 
     def __unicode__(self):
         return self.answer

@@ -9,8 +9,9 @@ class QuestionInline(admin.TabularInline):
 
 
 class ExamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'time', 'start')
+    list_display = ('name', 'time', 'start','see')
     prepopulated_fields = {"name_slug": ("name",)}
+    list_editable = ('start', 'see')
     inlines = [
         QuestionInline,
     ]
