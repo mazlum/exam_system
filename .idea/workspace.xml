@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79564449-755e-4c42-addc-117a9b93b9b4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/create_user.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/custom_jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/edit_profil.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/registration/password_change_done.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/registration/password_change_form.html" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/templates/home_page.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/admin.py" afterPath="$PROJECT_DIR$/exam/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base_template.html" afterPath="$PROJECT_DIR$/templates/base_template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/exam_access.html" afterPath="$PROJECT_DIR$/templates/exam_access.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/forms.py" afterPath="$PROJECT_DIR$/exam/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/header.html" afterPath="$PROJECT_DIR$/templates/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/templates/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/django-nested-inlines" afterPath="$PROJECT_DIR$/src/django-nested-inlines" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam_system/settings.py" afterPath="$PROJECT_DIR$/exam_system/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/urls.py" afterPath="$PROJECT_DIR$/exam/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam_system/urls.py" afterPath="$PROJECT_DIR$/exam_system/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/user_exams.html" afterPath="$PROJECT_DIR$/templates/user_exams.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/views.py" afterPath="$PROJECT_DIR$/exam/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="exam_system.iws" />
@@ -43,6 +28,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/exam_system/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="22" selection-start="410" selection-end="410" vertical-scroll-proportion="0.34937888" vertical-offset="0" max-vertical-offset="1590">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exam_system/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -69,10 +63,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="23" selection-start="67" selection-end="67" vertical-scroll-proportion="0.11645963" vertical-offset="0" max-vertical-offset="644">
+            <state line="5" column="23" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
               <folding />
             </state>
           </provider>
@@ -103,7 +97,6 @@
         <option value="$PROJECT_DIR$/exam/templatetags/custom_fitre.py" />
         <option value="$PROJECT_DIR$/exam/templatetags/custom_filters.py" />
         <option value="$PROJECT_DIR$/templates/user_exams.html" />
-        <option value="$PROJECT_DIR$/exam_system/settings.py" />
         <option value="$PROJECT_DIR$/exam/admin.py" />
         <option value="$PROJECT_DIR$/templates/user_exam_question.html" />
         <option value="$PROJECT_DIR$/templates/exam_access.html" />
@@ -120,6 +113,7 @@
         <option value="$PROJECT_DIR$/exam/forms.py" />
         <option value="$PROJECT_DIR$/templates/registration/password_change_done.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/exam_system/settings.py" />
       </list>
     </option>
   </component>
@@ -222,20 +216,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="registration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="exam_system" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="exam_system" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -674,13 +654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/exam_system/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="21" selection-start="947" selection-end="947" vertical-scroll-proportion="0.58229816" vertical-offset="165" max-vertical-offset="1590">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base_template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="73" selection-start="650" selection-end="650" vertical-scroll-proportion="0.26612905" vertical-offset="0" max-vertical-offset="620">
@@ -795,7 +768,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="23" selection-start="67" selection-end="67" vertical-scroll-proportion="0.11645963" vertical-offset="0" max-vertical-offset="644">
+        <state line="5" column="23" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exam_system/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="22" selection-start="410" selection-end="410" vertical-scroll-proportion="0.34937888" vertical-offset="0" max-vertical-offset="1590">
           <folding />
         </state>
       </provider>
