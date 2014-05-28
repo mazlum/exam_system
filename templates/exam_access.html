@@ -11,14 +11,20 @@
             {{ add_success }}
             <meta http-equiv="REFRESH" content="2;url=/">
         </div>
+    {% elif time_out %}
+         <div class="alert alert-danger">
+            {{ time_out }}
+            <meta http-equiv="REFRESH" content="2;url=/">
+        </div>
     {% else %}
-
+        <script type="text/javascript" src="/static/js/custom_jquery.js"></script>
+        <div id="name_slug">{{ exam.name_slug }}</div>
         <div class="panel panel-success">
             <div class="panel-heading">{{ exam.name }}</div>
             <div class="panel-body">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ question.question }} <div style="float: right" id="timer"></div></div>
+                    <div class="panel-heading">{{ question.question }} <div style="float: right">Time : <span id="exam_time">{{ exam.time }}</span> minutes | <span id="timer"></span></div></div>
                     <div class="panel-body">
                         <form method="post" action="">
                             {% csrf_token %}
@@ -44,17 +50,16 @@
                             </button>
                         </form>
 
-
                         {% if warning %}
                             <div class="alert alert-warning" style="padding: 6px">
                                 {{ warning }}
                             </div>
                         {% endif %}
-
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
+
 {% endblock %}
 

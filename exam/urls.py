@@ -8,5 +8,7 @@ urlpatterns = patterns('exam.views',
                         url(r'^user-exams/$', 'user_solve_exams'),
                         url(r'^user-exam/([\w._-]+)/$', 'user_exam_question'),
                         url(r'^user-register/$', 'user_register'),
-                        url(r'^edit-profile/$', 'edit_profile')
+                        url(r'^edit-profile/$', 'edit_profile'),
+                        url(r'^get-time/$', 'get_time'),
+                        url(r'^exam-start/([\w._-]+)/$', 'exam_start'),
                        )

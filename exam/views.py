@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from exam.forms import *
 from django.contrib.auth import *
 from exam.models import *
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 
 ##User can solve return exams from this function
@@ -28,13 +29,44 @@ def home_page(request):
     return render_to_response('exams.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
+def exam_start(request, exam_slug):
+    try:
+        exam = Exam.objects.get(name_slug=exam_slug)
+        if request.session["starting_exam"] == -1:
+            return render_to_response('exam_start.html', locals(), context_instance=RequestContext(request))
+        if exam.id != request.session["starting_exam"]:
+            danger="You started another exam. Please return to that exam."
+        else:
+            return HttpResponseRedirect("/exam/"+exam_slug)
+
+    except Exam.DoesNotExist:
+        danger = "Sorry, we don't have this exam."
+    return render_to_response('exam_start.html', locals(), context_instance=RequestContext(request))
+
+
+##User logout function defined. Because We don't want delete session while user was logout.
+@login_required
+def user_logout(request):
+    if hasattr(request.user, 'is_authenticated') and not request.user.is_authenticated():
+        user = None
+    user_logged_out.send(sender=request.user.__class__, request=request, user=request.user)
+    #request.session.flush()
+    if hasattr(request, 'user'):
+        from django.contrib.auth.models import AnonymousUser
+        request.user = AnonymousUser()
+
+
 #User login
 def user_login(request):
     next = request.GET.get('next')
     title = "Login"
     if request.GET.get('logout'):
         if request.user.is_authenticated():
-            logout(request)
+            #del request.session["i"]
+            #del request.session["starting_exam"]
+            #request.session.flush()
+            user_logout(request)
         HttpResponseRedirect('/')
 
     if request.user.is_authenticated():
@@ -50,6 +82,10 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    if not "i" in request.session:
+                        request.session["i"]=0
+                    if not "starting_exam" in request.session:
+                        request.session["starting_exam"] = -1
                     if next:
                         return HttpResponseRedirect(next)
 
@@ -72,16 +108,24 @@ def user_exam_question(request, exam_slug):
 
     return render_to_response('user_exam_question.html', locals(), context_instance=RequestContext(request))
 
+
 @login_required
 def user_solve_exams(request):
     exams = UserExam.objects.filter(user=request.user, exam__see=True)
     return render_to_response('user_exams.html', locals(), context_instance=RequestContext(request))
 
 
-i=0
+@login_required
+def get_time(request):
+    seconds = int((datetime.now() - request.session['time_start']).total_seconds())
+    return HttpResponse(seconds)
+
+
 @login_required
 def exam_access(request, exam_slug):
-    global i
+
+    if not "time_start" in request.session:
+        request.session["time_start"] = datetime.now()
 
     try:
         exam = Exam.objects.get(name_slug=exam_slug)
@@ -98,31 +142,51 @@ def exam_access(request, exam_slug):
             danger = "This exam not started yet."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
         ##Exam questions
+
+        if request.session["starting_exam"] != exam.id and request.session["starting_exam"] != -1:
+            danger = "You started another exam. Please return to that exam."
+            return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
+
+        #time is over.
+        if (datetime.now() - request.session['time_start']).total_seconds() > exam.time*60:
+            #Get user true answer
+            true_answer = QuestionUserAnswer.objects.filter(user=request.user, exam=exam, answer__true=True).count()
+            #Add UserExam user exam and point
+            user_exam_add = UserExam(user=request.user, exam=exam, point=true_answer).save()
+            time_out = "Sorry, Your time is over for this question. We have received yours answers."
+            #delete session
+            del request.session['time_start']
+            request.session["i"] = 0
+            request.session["starting_exam"] = -1
+            return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request, {'i': request.session["i"]}))
+
         questions = Question.objects.filter(exam=exam)
         if questions.count() <= 0:
             danger = "This exam don't have got questions."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
 
         ##Unanswered question
-        unanswered = QuestionUserAnswer.objects.filter(exam=exam, question__in=questions[:(i+1)])
-        if unanswered.count() < i:
+        unanswered = QuestionUserAnswer.objects.filter(exam=exam, question__in=questions[:(request.session["i"]+1)])
+        if unanswered.count() < request.session["i"]:
                 warning = "You have got unanswered question."
 
-
         #Get question
-        question = questions[i]
+        question = questions[request.session["i"]]
 
         #Get question answers
         answers = Answer.objects.filter(question=question)
+
+        request.session["starting_exam"] = exam.id
 
         ##Did user answered question?
         question_user_answer = QuestionUserAnswer.objects.filter(user=request.user, exam=exam, question=question)
         #Get question count for exam
         exam_question_count = Question.objects.filter(exam=exam).count()
 
+
         if request.method == "POST":
             if "back" in request.POST:
-                i -= 1
+                request.session["i"] -= 1
                 return HttpResponseRedirect('/exam/'+exam.name_slug)
 
             if "reply" in request.POST:
@@ -130,7 +194,7 @@ def exam_access(request, exam_slug):
                 question_answer = request.POST.get('answer')
 
                 if question_answer == None:
-                    i += 1
+                    request.session["starting_exam"] += 1
                     return HttpResponseRedirect('/exam/'+exam.name_slug)
                 else:
                     if not question_answer.isdigit():
@@ -144,8 +208,8 @@ def exam_access(request, exam_slug):
                     add_answer.save()
 
                     ##is question last?
-                    if i != exam_question_count-1:
-                        i += 1
+                    if request.session["i"] != exam_question_count-1:
+                        request.session["i"] += 1
                         return HttpResponseRedirect('/exam/'+exam.name_slug)
 
                     try:
@@ -155,16 +219,17 @@ def exam_access(request, exam_slug):
                         user_exam_add = UserExam(user=request.user, exam=exam, point=true_answer).save()
                         #delete QuestionUserAnswer user exam answers
                         #QuestionUserAnswer.objects.filter(user=request.user, exam=exam).delete()
-
+                        del request.session['time_start']
                         add_success = "Thank you. You successfully finished the exam."
-                        i = 0
+                        request.session["i"] = 0
+                        request.session["starting_exam"] = -1
                     except:
                         danger = "Sorry, We have a problem."
 
     except Exam.DoesNotExist:
         danger = "Sorry, we don't have this exam."
 
-    return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request, {'i': i}))
+    return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request, {'i': request.session["i"]}))
 
 
 ##User Sign Up
@@ -179,6 +244,7 @@ def user_register(request):
     return render_to_response('create_user.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def edit_profile(request):
 
     user = User.objects.get(id=request.user.id)

@@ -11,7 +11,7 @@
             </tr>
             {% for exam in have_exams %}
                 <tr>
-                    <td><a href="/exam/{{ exam.name_slug }}">{{ exam.name }}</a></td>
+                    <td><a href="/exam-start/{{ exam.name_slug }}">{{ exam.name }}</a></td>
                     <td>{{ exam.time }}</td>
                 </tr>
             {% endfor %}
