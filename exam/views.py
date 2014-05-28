@@ -6,6 +6,7 @@ from django.contrib.auth import *
 from exam.models import *
 from django.contrib.auth.decorators import login_required
 
+
 ##User can solve return exams from this function
 def user_exams(request):
     exams_groups = GroupExam.objects.filter(group__in=request.user.groups.all())
@@ -14,6 +15,7 @@ def user_exams(request):
         for exam in exams_group.exam.all():
             have_exams.append(exam)
     return have_exams
+
 
 #Home page
 @login_required
@@ -24,6 +26,7 @@ def home_page(request):
     for ae in answered_exam:
         have_exams.remove(ae.exam)
     return render_to_response('exams.html', locals(), context_instance=RequestContext(request))
+
 
 #User login
 def user_login(request):
@@ -56,6 +59,7 @@ def user_login(request):
     return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
 
+@login_required
 def user_exam_question(request, exam_slug):
     try:
         exam = UserExam.objects.get(exam__name_slug=exam_slug, user=request.user, exam__see=True).exam
@@ -72,6 +76,7 @@ def user_exam_question(request, exam_slug):
 def user_solve_exams(request):
     exams = UserExam.objects.filter(user=request.user, exam__see=True)
     return render_to_response('user_exams.html', locals(), context_instance=RequestContext(request))
+
 
 i=0
 @login_required
@@ -160,3 +165,30 @@ def exam_access(request, exam_slug):
         danger = "Sorry, we don't have this exam."
 
     return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request, {'i': i}))
+
+
+##User Sign Up
+def user_register(request):
+    if request.method == "POST":
+        register_form = UserCreateForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            info = "Registration is successful. Administrators are waiting for the approval. "
+    else:
+        register_form = UserCreateForm()
+    return render_to_response('create_user.html', locals(), context_instance=RequestContext(request))
+
+
+def edit_profile(request):
+
+    user = User.objects.get(id=request.user.id)
+
+    if request.method == "POST":
+        editprofil_form = EditProfileForm(request.POST, instance=user)
+        if editprofil_form.is_valid():
+            editprofil_form.save()
+            info = "Editing was succesfully."
+    else:
+        editprofil_form = EditProfileForm(initial=user.__dict__)
+
+    return render_to_response('edit_profil.html',locals(),context_instance=RequestContext(request))

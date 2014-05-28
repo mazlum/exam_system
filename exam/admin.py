@@ -2,25 +2,11 @@
 from django.contrib import admin
 from exam.models import *
 from django.contrib.auth.forms import *
+##Exam nested inlines for question and answer
+from nested_inlines.admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 
 
-class QuestionInline(admin.TabularInline):
-    model = Question
-
-
-class ExamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'time', 'start','see')
-    prepopulated_fields = {"name_slug": ("name",)}
-    list_editable = ('start', 'see')
-    inlines = [
-        QuestionInline,
-    ]
-
-class UserExamAdmin(admin.ModelAdmin):
-    list_display = ["user", "exam", "point"]
-    list_filter = ["user", "exam"]
-
-class AnswerInline(admin.TabularInline):
+class AnswerInline(NestedTabularInline):
     model = Answer
     extra = 4
     max_num = 5
@@ -36,6 +22,25 @@ class QuestionAdmin(admin.ModelAdmin):
 
     def get_true_answer(self, obj):
         return Answer.objects.get(question=obj, true=True).answer
+
+
+class QuestionInline(NestedStackedInline):
+    model = Question
+    inlines = (AnswerInline,)
+
+
+class ExamAdmin(NestedModelAdmin):
+    list_display = ('name', 'time', 'start','see')
+    prepopulated_fields = {"name_slug": ("name",)}
+    list_editable = ('start', 'see')
+    inlines = [
+        QuestionInline
+    ]
+
+class UserExamAdmin(admin.ModelAdmin):
+    list_display = ["user", "exam", "point"]
+    list_filter = ["user", "exam"]
+
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('answer', 'question', 'true')

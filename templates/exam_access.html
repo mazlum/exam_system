@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ question.question }}</div>
+                    <div class="panel-heading">{{ question.question }} <div style="float: right" id="timer"></div></div>
                     <div class="panel-body">
                         <form method="post" action="">
                             {% csrf_token %}

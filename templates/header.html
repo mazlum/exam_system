@@ -21,8 +21,7 @@
 
       {% if request.user.is_authenticated %}
       <ul class="nav navbar-nav">
-            <li><a href="/user-exams/">My Exam</a></li>
-            <li><a href="#">Menu</a></li>
+            <li><a href="/user-exams/">My Exams</a></li>
       </ul>
       {% endif %}
 
@@ -30,7 +29,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="label label-primary" style="margin-top: 16px;padding: 4px;margin-right: 6px">{{ user.username }}</li>
           {% if request.user.is_authenticated %}
-            <li><a href="/login/?logout=true">Logout</a></li>
+            <li class="dropdown">
+                 <a href="" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                <li><a href="/edit-profile/">Edit Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="/login/?logout=true">Logout</a></li>
+                </ul>
+            </li>
           {% else %}
             <li><a href="/login/">Login</a></li>
           {% endif %}
