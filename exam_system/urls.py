@@ -9,7 +9,8 @@ from exam import views
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('exam.urls')),
-    url(r'^accounts/login/$','exam.views.user_login'),
+    url(r'^accounts/login/$', 'exam.views.user_login'),
+    
     url(r'^accounts/password/$',
         'django.contrib.auth.views.password_change',
         {'password_change_form': ValidatingPasswordChangeForm},

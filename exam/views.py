@@ -124,15 +124,21 @@ def get_time(request):
 @login_required
 def exam_access(request, exam_slug):
 
+    if not HttpResponseRedirect:
+        return HttpResponseRedirect("/")
+
+    ##Did exam started. ?
     if not "time_start" in request.session:
         request.session["time_start"] = datetime.now()
 
     try:
+        #Get exam.
         exam = Exam.objects.get(name_slug=exam_slug)
         if not exam in user_exams(request):
             danger = "You don't have permission for solve this exam."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
 
+        #Did user solve exam.
         if UserExam.objects.filter(user=request.user, exam=exam).count():
             danger = "You answered this question."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
@@ -141,13 +147,13 @@ def exam_access(request, exam_slug):
         if exam.start == False:
             danger = "This exam not started yet."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
-        ##Exam questions
+
 
         if request.session["starting_exam"] != exam.id and request.session["starting_exam"] != -1:
             danger = "You started another exam. Please return to that exam."
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request))
 
-        #time is over.
+        #time is over. save and redirect.
         if (datetime.now() - request.session['time_start']).total_seconds() > exam.time*60:
             #Get user true answer
             true_answer = QuestionUserAnswer.objects.filter(user=request.user, exam=exam, answer__true=True).count()
@@ -160,6 +166,7 @@ def exam_access(request, exam_slug):
             request.session["starting_exam"] = -1
             return render_to_response('exam_access.html', locals(), context_instance=RequestContext(request, {'i': request.session["i"]}))
 
+        ##Exam questions
         questions = Question.objects.filter(exam=exam)
         if questions.count() <= 0:
             danger = "This exam don't have got questions."
@@ -183,12 +190,14 @@ def exam_access(request, exam_slug):
         #Get question count for exam
         exam_question_count = Question.objects.filter(exam=exam).count()
 
-
+        ##page post
         if request.method == "POST":
+            ##back ppost
             if "back" in request.POST:
                 request.session["i"] -= 1
                 return HttpResponseRedirect('/exam/'+exam.name_slug)
 
+            ##question solve posst
             if "reply" in request.POST:
 
                 question_answer = request.POST.get('answer')
