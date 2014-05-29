@@ -52,6 +52,7 @@ class QuestionUserAnswerAdmin(admin.ModelAdmin):
     list_display = ('user', 'exam', 'question', 'answer')
     list_filter = ('user', 'exam', 'question')
 
+
 class GroupExamForm(forms.ModelForm):
     def clean_group(self):
         group = self.cleaned_data.get('group')
@@ -62,7 +63,7 @@ class GroupExamForm(forms.ModelForm):
 
 class GroupExamAdmin(admin.ModelAdmin):
     list_display = ['group', 'get_exam']
-
+    
     def get_exam(self, obj):
         return ",".join(exam.name for exam in obj.exam.all())
 

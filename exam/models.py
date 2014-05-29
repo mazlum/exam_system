@@ -14,6 +14,7 @@ class Exam(models.Model):
         return self.name
 
 
+
 class UserExam(models.Model):
     user = models.ForeignKey(User, verbose_name="User ")
     exam = models.ForeignKey(Exam, verbose_name="Exam ")
@@ -22,6 +23,8 @@ class UserExam(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.user.username, self.exam.name)
 
+    class Meta:
+        verbose_name = "Users and Exam"
 
 class Question(models.Model):
     question = models.TextField(verbose_name="Question Title ")
@@ -32,10 +35,6 @@ class Question(models.Model):
             return Answer.objects.get(question=self, true=True).answer
         except Answer.DoesNotExist:
             return "Answer does not exist"
-    #### ???????????????????????????????
-
-    def get_user_answer(self, user):
-         QuestionUserAnswer.objects.get(question=self, user=user).answer.answer
 
     def __unicode__(self):
         return self.question
@@ -60,9 +59,15 @@ class QuestionUserAnswer(models.Model):
     def __str__(self):
         return "%s,%s,%s"%(self.user,self.question,self.answer)
 
+    class Meta:
+        verbose_name = "Question, User, Exam and Answer"
+
 class GroupExam(models.Model):
     group = models.ForeignKey(Group, verbose_name="Group ")
     exam = models.ManyToManyField(Exam, verbose_name="Exam ")
 
     def __str__(self):
         return "%s,%s"%(self.group,self.exam)
+
+    class Meta:
+        verbose_name = "Groups and Exam"
