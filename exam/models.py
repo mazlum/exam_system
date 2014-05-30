@@ -41,7 +41,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    answer = models.CharField(max_length=300,verbose_name="Question answer ")
+    answer = models.CharField(max_length=300, verbose_name="Question answer ")
     question = models.ForeignKey(Question, verbose_name="Answer Question ")
     true = models.BooleanField(verbose_name="True Answer ")
 

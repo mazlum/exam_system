@@ -95,6 +95,7 @@ def user_login(request):
     return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
 
+##Are you sure solve question?
 @login_required
 def user_exam_question(request, exam_slug):
     try:
@@ -109,18 +110,21 @@ def user_exam_question(request, exam_slug):
     return render_to_response('user_exam_question.html', locals(), context_instance=RequestContext(request))
 
 
+##Users solved exams
 @login_required
 def user_solve_exams(request):
     exams = UserExam.objects.filter(user=request.user, exam__see=True)
     return render_to_response('user_exams.html', locals(), context_instance=RequestContext(request))
 
 
+##User get time. Using Jquery Ajax.
 @login_required
 def get_time(request):
     seconds = int((datetime.now() - request.session['time_start']).total_seconds())
     return HttpResponse(seconds)
 
 
+##User access the question
 @login_required
 def exam_access(request, exam_slug):
 
@@ -192,7 +196,7 @@ def exam_access(request, exam_slug):
 
         ##page post
         if request.method == "POST":
-            ##back ppost
+            ##back p
             if "back" in request.POST:
                 request.session["i"] -= 1
                 return HttpResponseRedirect('/exam/'+exam.name_slug)
@@ -253,6 +257,7 @@ def user_register(request):
     return render_to_response('create_user.html', locals(), context_instance=RequestContext(request))
 
 
+##user edit profile
 @login_required
 def edit_profile(request):
 
