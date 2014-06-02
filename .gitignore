@@ -3,4 +3,4 @@
 .git
 .git/*
 db/db.exam_system
-exam_system/settings.py
+

@@ -21,6 +21,7 @@ def user_exams(request):
 #Home page
 @login_required
 def home_page(request):
+    title = "Exam System"
     have_exams = user_exams(request)
     ##Solved exams
     answered_exam = UserExam.objects.filter(user=request.user)
@@ -31,12 +32,13 @@ def home_page(request):
 
 @login_required
 def exam_start(request, exam_slug):
+    title = "Exam start"
     try:
         exam = Exam.objects.get(name_slug=exam_slug)
         if request.session["starting_exam"] == -1:
             return render_to_response('exam_start.html', locals(), context_instance=RequestContext(request))
         if exam.id != request.session["starting_exam"]:
-            danger="You started another exam. Please return to that exam."
+            danger = "You started another exam. Please return to that exam."
         else:
             return HttpResponseRedirect("/exam/"+exam_slug)
 
@@ -113,6 +115,7 @@ def user_exam_question(request, exam_slug):
 ##Users solved exams
 @login_required
 def user_solve_exams(request):
+    title = "Your Exams"
     exams = UserExam.objects.filter(user=request.user, exam__see=True)
     return render_to_response('user_exams.html', locals(), context_instance=RequestContext(request))
 
@@ -188,7 +191,7 @@ def exam_access(request, exam_slug):
         answers = Answer.objects.filter(question=question)
 
         request.session["starting_exam"] = exam.id
-
+        title = exam.name + " / " + str(request.session["i"] + 1)
         ##Did user answered question?
         question_user_answer = QuestionUserAnswer.objects.filter(user=request.user, exam=exam, question=question)
         #Get question count for exam
@@ -247,6 +250,7 @@ def exam_access(request, exam_slug):
 
 ##User Sign Up
 def user_register(request):
+    title = "User Register"
     if request.method == "POST":
         register_form = UserCreateForm(request.POST)
         if register_form.is_valid():
@@ -260,7 +264,7 @@ def user_register(request):
 ##user edit profile
 @login_required
 def edit_profile(request):
-
+    title = "Edit Profile"
     user = User.objects.get(id=request.user.id)
 
     if request.method == "POST":
