@@ -106,8 +106,8 @@ TEMPLATE_DIRS = (
 
 ##Mail
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'mazlum.agar@gmail.com'
-EMAIL_HOST_PASSWORD = 'mymnfmmugpoybbgu'
+EMAIL_HOST_USER = '*****'
+EMAIL_HOST_PASSWORD = '****'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL ='Django Team'
 EMAIL_USE_TLS = True
